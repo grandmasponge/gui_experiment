@@ -50,6 +50,7 @@ impl Default for Time {
 impl eframe::App for Time {
     fn update(&mut self, ctx: &egui::Context, frame: &mut eframe::Frame) {
         egui::CentralPanel::default().show(ctx, |ui| {
+            self.now = get("http://worldtimeapi.org/api/timezone/Europe/".to_owned()+&self.Location);
             ui.menu_button("Locations", |ui| {
                 if ui.button("London").clicked() {
                     self.now =
@@ -68,7 +69,6 @@ impl eframe::App for Time {
                     self.now = get("http://worldtimeapi.org/api/timezone/Europe/Warsaw".to_string());
                     self.Location = String::from("Warsaw")
                 }
-
                 if ui.button("exit").clicked() {
                     ui.close_menu();
                 }
